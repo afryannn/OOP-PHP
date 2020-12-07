@@ -98,6 +98,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <a class="btn btn-link" href="welcome.php">Cancel</a>
             </div>
         </form>
-    </div>    
+    </div> 
+    <script src="./asset/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="./asset/vendor/animsition/js/animsition.min.js"></script>
+	<script src="./asset/vendor/bootstrap/js/popper.js"></script>
+	<script src="./asset/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./asset/vendor/select2/select2.min.js"></script>
+	<script src="./asset/vendor/daterangepicker/moment.min.js"></script>
+	<script src="./asset/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="./asset/vendor/countdowntime/countdowntime.js"></script>
+	<script src="./asset/js/main.js"></script>   
 </body>
 </html>

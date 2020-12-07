@@ -1,7 +1,7 @@
 <?php
 include('sho.php');
 $db = new read();
-$data_barang = $db->tampildata();
+$datas = $db->tampildata();
 // Initialize the session
 session_start();
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -54,7 +54,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <li><a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a></li>
     </ul>
   </div>
-</nav>  <!-- End of Navigation Bar -->
+</nav>  End of Navigation Bar
 
 <!-- Jumbotron -->
 <div class="container">
@@ -77,18 +77,27 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                         <tbody>
                             <?php
-                            $no = 1;
-                    foreach($data_barang as $row){
-                        ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['address']; ?></td>
-                                <td><?php echo $row['salary']; ?></td>
-                            </tr>
-                            <?php    
-                    }
-                    ?>
+                             $no = 1;
+                             if (is_array($datas)){
+                             foreach($datas as $row){
+                              ?>
+                                <tr>
+                                 <td><?php echo $no++; ?></td>
+                                 <td><?php echo $row['name']; ?></td>
+                                 <td><?php echo $row['address']; ?></td>
+                                 <td><?php echo $row['salary']; ?></td>
+                             </tr>
+                             <?php    
+                            }
+                           }else{
+                             ?>
+                              <div class="alert alert-info" role="alert">
+                              Data Sedang Kosong!
+                            </div>
+                            <?php
+                           }
+                            ?>
+                                         
                         </tbody>
                     </table>
                 </div>
@@ -97,10 +106,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <p>
             <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
         </p>
-</body>
-      </div>
-      </div>
-</div>  <!-- End of Jumbotron -->
+</body> <!-- End of Jumbotron -->
 <style>
 /* Navigation Bar */
 .cc{

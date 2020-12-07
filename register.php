@@ -99,37 +99,92 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="icon" type="image/png" href="./asset/images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="./asset/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./asset/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="./asset/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="./asset/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="./asset/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="./asset/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="./asset/vendor/select2/select2.min.css">	
+	<link rel="stylesheet" type="text/css" href="./asset/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="./asset/css/util.css">
+	<link rel="stylesheet" type="text/css" href="./asset/css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <style type="./asset/text/css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h2>Sign Up</h2>
-        <p>Please fill this form to create an account.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-                <span class="help-block"><?php echo $confirm_password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
-            </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
-        </form>
-    </div>    
+<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+			
+					<span class="login100-form-title p-b-33">
+						Sign Up
+                    </span>
+                    
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+					<div class="wrap-input100 validate-input <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+						<input class="input100" type="text" name="username" placeholder="username" value="<?php echo $username;?>">
+                    </div>
+                    <span class="help-block" style="color:red !important;"><?php echo $username_err; ?></span>
+                    
+                    <div class="wrap-input100 rs1 validate-input  <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>" data-validate="Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password" value="<?php echo $password; ?>">
+                    </div>
+                    <span class="help-block" style="color:red !important;"><?php echo $password_err; ?></span>
+
+
+                    <div class="wrap-input100 rs1 validate-input  <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>" data-validate="Password is required">
+						<input class="input100" type="password" name="confirm_password" placeholder="Confirm Password" value="<?php echo $confirm_password; ?>">
+                    </div>
+                    <span class="help-block" style="color:red !important;"><?php echo $confirm_password_err; ?></span>
+
+
+
+					<div class="container-login100-form-btn m-t-20">
+						<button class="login100-form-btn" value="login">
+							Sign up
+						</button>
+                    </div>
+                   </form>
+
+					<div class="text-center p-t-45 p-b-4">
+						<span class="txt1">
+							Forgot
+						</span>
+
+						<a href="reset-password.php" class="txt2 hov1">
+					      Password?
+						</a>
+					</div>
+
+					<div class="text-center">
+						<span class="txt1">
+							Create an account?
+						</span>
+
+						<a href="login.php" class="txt2 hov1">
+							Sigin
+						</a>
+					</div>
+			
+			</div>
+		</div>
+    </div>
+    
+    <script src="./asset/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="./asset/vendor/animsition/js/animsition.min.js"></script>
+	<script src="./asset/vendor/bootstrap/js/popper.js"></script>
+	<script src="./asset/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./asset/vendor/select2/select2.min.js"></script>
+	<script src="./asset/vendor/daterangepicker/moment.min.js"></script>
+	<script src="./asset/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="./asset/vendor/countdowntime/countdowntime.js"></script>
+	<script src="./asset/js/main.js"></script>
 </body>
 </html>
