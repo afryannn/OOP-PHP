@@ -1,8 +1,7 @@
 <?php
-include('sho.php');
-$db = new read();
+include('./app/Controller.php');
+$db = new Controller();
 $datas = $db->tampildata();
-// Initialize the session
 session_start();
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
@@ -27,6 +26,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         font: 14px sans-serif;
         text-align: center;
     } 
+    .table-responsive {
+       max-height:300px;
+      }
     </style>
 </head>
 
@@ -45,13 +47,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <a href="#" class="navbar-brand">
     <p><b>Hi,</b><?php  echo htmlspecialchars($_SESSION["username"]); ?></p>
     </a>
-   
-   
 </a>
   </div>
   <div class="collapse navbar-collapse" style="margin-right:100px !important;" id="resNav">
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a></li>
+      <li><a href="./app/Route.php?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a></li>
     </ul>
   </div>
 </nav>  End of Navigation Bar
@@ -75,7 +75,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody class="jncj">
                             <?php
                              $no = 1;
                              if (is_array($datas)){
@@ -114,7 +114,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   color: white !important;
 }
 .page-header{
-    margin-top:150px;
+    margin-top:100px;
 }
 .navbar{
   height:80px;
