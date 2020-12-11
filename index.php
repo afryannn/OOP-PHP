@@ -2,11 +2,7 @@
 include('./app/Controller.php');
 $db = new Controller();
 $datas = $db->tampildata();
-session_start();
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -42,16 +38,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <span class="icon-bar"></span>
     </button>
     <a href="#" class="navbar-brand"  style="margin-left:90px !important;">
-   <img src="./avatart.jpeg" class="img-circle"> 
+      <p><b>Halo,</b>Selamat Datang</p> 
     </a>
     <a href="#" class="navbar-brand">
-    <p><b>Hi,</b><?php  echo htmlspecialchars($_SESSION["username"]); ?></p>
-    </a>
+       </a>
 </a>
   </div>
   <div class="collapse navbar-collapse" style="margin-right:100px !important;" id="resNav">
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="./app/Route.php?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a></li>
+    <li><a href="./app/Route.php?action=logout" style="font-weight:bold;"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                </li>
     </ul>
   </div>
 </nav>  End of Navigation Bar
@@ -59,7 +55,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <!-- Jumbotron -->
 <div class="container">
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.Welcome to our site.</h1>
+       <h3 style="font-weight: bold;" class="text-secondary">Daftar Employe</h3>
       <div class="jumbotron" style="background:#fff !important">
       <div class="wrapper">
         <div class="container">
@@ -103,9 +99,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 </div>
             </div>
         </div>
-        <p>
-            <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-        </p>
+        <!-- <p>
+            <a href="reset-password.php" style="margin-top:30px;" class="btn btn-warning">Reset Your Password</a>
+        </p> -->
 </body> <!-- End of Jumbotron -->
 <style>
 /* Navigation Bar */

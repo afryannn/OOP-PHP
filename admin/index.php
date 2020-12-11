@@ -2,6 +2,8 @@
 include('../app/Controller.php');
 $func = New Controller();
 $datas = $func->tampildata();
+$success_add_new_data = "NcLUuyMe22T9BrEg7XvudXcRMpLckcmBcnNGFj7Mh9hFaLkA4auhnjZFnneM9zgZBARSTT6U6JSmkByC37RyzZUbSQoqo3kEvxz5";
+$success_reset_password = "3JUEGRhBJ82f9pk9p8iTjRMzxvDoaYKs24n5yQQazjLz8mgAEEnsD6fydsn3ffkdoqbRnZE4sYHrjKD6mEtSX9iRnu28uBEhZkt3CMUAtKmRn6t4jv5xqhLU";
 session_start();
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "admin"){
     header("location:../error/1.html");
@@ -15,6 +17,8 @@ unset($_SESSION["bind_item_id"]);
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
@@ -54,6 +58,7 @@ unset($_SESSION["bind_item_id"]);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            
             <a href="#" class="navbar-brand" style="margin-left:90px !important;">
                 <img src="../asset/avatart.jpeg" class="img-circle">
             </a>
@@ -64,7 +69,11 @@ unset($_SESSION["bind_item_id"]);
         </div>
         <div class="collapse navbar-collapse" style="margin-right:100px !important;" id="resNav">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./app/Route.php?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a>
+                <li>
+                    <a href="../app/Route.php?action=logout">
+                        <i class="fa fa-sign-out"></i>
+                        Keluar
+                    </a>
                 </li>
             </ul>
         </div>
@@ -77,6 +86,32 @@ unset($_SESSION["bind_item_id"]);
                 <div class="wrapper">
                     <div class="container">
                         <div class="card">
+                            <?php
+                             if(isset($_GET[$success_reset_password])){
+                                 ?>
+                            <div class="alert alert-success" role="alert">
+                               <i class="fa fa-check-square"></i>
+                                Password Berhasil Diubah
+                            </div>
+                            <?php
+                             }elseif(isset($_GET[$success_add_new_data])){
+                                 ?>
+                                 <div class="alert alert-info" role="alert">
+                                 <i class="fa fa-database"></i>
+                                 Berhasil Menambahkan Employe
+                              </div>
+                                <?php
+                             }
+                             ?>
+                            <script>
+                            $(document).ready(function() {
+                                window.setTimeout(function() {
+                                    $(".alert").fadeTo(1000, 0).slideUp(1000, function() {
+                                        $(this).remove();
+                                    });
+                                }, 5000);
+                            });
+                            </script>
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
@@ -134,58 +169,33 @@ unset($_SESSION["bind_item_id"]);
                                                         title='Update Record' data-toggle='tooltip'><span
                                                             class='glyphicon glyphicon-pencil'></span></a></center>
                                             </td>
+
                                             <td>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="myModal" role="dialog">
-                                                    <div class="modal-dialog">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal">&times;</button>
-                                                                <b>
-                                                                    <h4 class="modal-title text-danger">Hapus Data?</h4>
-                                                                </b>
-
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="alert alert-danger" role="alert">
-                                                                    <center>
-                                                                        <p style="font-size:15px;">Apakah Anda Yakin Mau Menghapus<br>Data ini?</p>
-                                                                    </center>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <a
-                                                                    href='../app/Route.php?action=deleteitem&id=<?php echo $datas['id'];?>'
-                                                                    type="button" class="btn btn-danger">Hapus</a>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                                <center><a title='Delete Record'
-                                                        data-toggle='tooltip'><span class='glyphicon glyphicon-trash'
-                                                            data-toggle="modal" data-target="#myModal"></span></a>
+                                                <center>
+                                                    <a title='Delete Record'
+                                                        href='../app/Route.php?action=deleteitem&d_id=<?php echo $datas['id'];?>'
+                                                        data-toggle='tooltip'><span
+                                                            class='glyphicon glyphicon-trash'></span>
                                                 </center>
-                                            </td>
-                                        </tr>
-                                        <?php
+                            </div>
+                            </td>
+                            </tr>
+                            <?php
                                          }
                                      }
                                     ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                            </tbody>
+                            </table>
                         </div>
                     </div>
-                    <p>
-                        <a href="create.php" style="margin-left:13px !important;" class="btn btn-success">Tambah
-                            Data</a>
-                    </p>
+                </div>
+                <p>
+                    <a href="create.php" style="margin-left:13px !important;" class="btn btn-success">Tambah
+                        Data</a>
+                    <a href="../reset-password.php" style="margin-left:13px !important;" class="btn btn-warning">Reset
+                        Password
+                        Data</a>
+                </p>
 
 </body>
 <style>

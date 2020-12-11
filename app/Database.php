@@ -11,6 +11,6 @@ $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
 // fungsi untuk cek config
 if($link === false){
-    Header('Location:../login.php?NetworkErr');
+    Header('Location:../error/500.html');
 }
 ?>

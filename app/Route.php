@@ -31,8 +31,8 @@ switch ($action) {
         $controller->bind_item_id($id, $opt);
         break;
     case "deleteitem":
-        $id = $_GET['id'];
-        $controller->delete_item($id);
+        $iddd = trim($_GET['d_id']);
+        $controller->delete_item($iddd);
         break;
     case "logout":
         $controller->logout();

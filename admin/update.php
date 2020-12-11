@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="collapse navbar-collapse" style="margin-right:100px !important;" id="resNav">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./app/Route.php?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a>
+                <li><a href="./index.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Kembali</a>
                 </li>
             </ul>
         </div>
@@ -115,7 +115,7 @@ if ($validate_err == "msg1") {
                             <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>"
                                 method="post">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"><?php echo $result['name']; ?></label>
+                                    <label for="exampleInputEmail1">Username</label>
                                     <input
                                      value="<?php echo $result['name']; ?>" name="nama" class="form-control"
                                         id="exampleInputEmail1" placeholder="Masukan Nama">

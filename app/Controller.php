@@ -10,7 +10,7 @@ class Controller
         if ($this->koneksi) {
             // echo "MYSQL CONNECTED";
         } else {
-            Header('Location:../login.php?NetworkErr');
+            header("location: ./error/500.html");
         }
     }
     public function post_update($nama, $alamat, $salary,$id){
@@ -38,7 +38,8 @@ class Controller
             $param_address = $alamat;
             $param_salary = $salary;
             if (mysqli_stmt_execute($stmt)) {
-                header("location:../admin/index.php");
+                $msg = "NcLUuyMe22T9BrEg7XvudXcRMpLckcmBcnNGFj7Mh9hFaLkA4auhnjZFnneM9zgZBARSTT6U6JSmkByC37RyzZUbSQoqo3kEvxz5";
+                header("location:../admin/index.php?".$msg);
                 exit();
             } else {
                 echo "Terjadi kesalahan. Mohon coba lagi.";
@@ -80,12 +81,19 @@ class Controller
     public function reset_password($id, $password)
     {
         $sql = "UPDATE users set password='$password' WHERE id='$id'";
-        $query = mysqli_query($this->koneksi, $sql);
-        if (!$query) {
-            die("Fail  " . mysqli_error($this->koneksi));
-        } else {
-            Header('Location:../welcome.php');
+        if($stmt = mysqli_prepare($this->koneksi,$sql)){
+            mysqli_stmt_bind_param($stmt,"si",$param_password,$param_id);
+            $param_password = $password;
+            $param_id = $id;
+            if(mysqli_stmt_execute($stmt)){
+                $msg = "3JUEGRhBJ82f9pk9p8iTjRMzxvDoaYKs24n5yQQazjLz8mgAEEnsD6fydsn3ffkdoqbRnZE4sYHrjKD6mEtSX9iRnu28uBEhZkt3CMUAtKmRn6t4jv5xqhLU";
+                Header('Location:../admin/index.php?'.$msg);
+            }else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+            mysqli_stmt_close($stmt);
         }
+        mysqli_close($this->koneksi);
     }
     public function logout()
     {
@@ -123,15 +131,16 @@ class Controller
                 $result['name'] = $row["name"];
                 $result['address'] = $row["address"];
                 $result['salary'] = $row["salary"];
+                unset($_SESSION['bind_item_id']);
                 return $result;
             }
         } else {
             echo "Oops! Terjadi kesalahan. Silakan coba lagi.";
         }
     }
-    public function delete_item($id)
+    public function delete_item($iddd)
     {
-        $sql = "DELETE FROM employees WHERE id = $id";
+        $sql = "DELETE FROM employees WHERE id = $iddd";
         if ($stmt = mysqli_prepare($this->koneksi, $sql)) {
             if (mysqli_stmt_execute($stmt)) {
                 $query = mysqli_query($this->koneksi, $sql);
@@ -159,6 +168,7 @@ class Controller
                 $result['name'] = $row["name"];
                 $result['address'] = $row["address"];
                 $result['salary'] = $row["salary"];
+                unset($_SESSION['bind_item_id']);
                 return $result;
             }
         } else {
@@ -180,22 +190,26 @@ class Controller
     }
     public function login($username, $password)
     {
+        $msg = "";
         $sql = "SELECT * FROM users where username='$username'";
         $login = mysqli_query($this->koneksi, $sql);
         $data = mysqli_fetch_assoc($login);
         if ($username != $data['username']) {
-            Header('Location:../login.php?Autherr1');
+            $msg = "YUmCU74eCeHC5AVGrHxxdDtY9kRUMLkPEEpXEbDnsREXNShecEDRvpNJXU3pqLhY8sMPdz28H6aHMV3sAntZzsY2t3d2HjHTAk9brE8ur3pnyHmHeRJjaYiM";
+            Header('Location:../login.php?'.$msg);
         } else {
             if ($password !== $data['password']) {
-                Header('Location:../login.php?Autherr2');
-            } else {
+                $msg = "mxnBrpeBdfKcvB8FsdhQAVKKQXQMz5J96GhJnv26e5Xx8KJXGrZnNsABDHiz9L52TiqQDVfHVKSVfaAgbgD8ykyAt6FUQjHcGfFeRxTZD8DGpBjPigjENaQp";
+                Header('Location:../login.php?'.$msg);
+             } else {
                 if ($data['role'] == "user") {
                     session_start();
                     $_SESSION["id"] = $data['id'];
                     $_SESSION["loggedin"] = true;
                     $_SESSION['username'] = $username;
                     $_SESSION['role'] = "user";
-                    header("location:../welcome.php");
+                    $msg = "27nipfeEDnPqiFuxAnV9R6pRjg9FHgTn9oGRTU8cb7vGLpvcEeXEA3CJboHHHoqQSkM8qN9Q3rPQeXxHAm6XMGPhe6NCgMz482crBpyymrpakkFdn8JcLfb8";
+                    header("location:../login.php?".$msg);
                 } else if ($data['role'] == "admin") {
                     session_start();
                     $_SESSION["id"] = $data['id'];
@@ -204,8 +218,9 @@ class Controller
                     $_SESSION['role'] = "admin";
                     header("location:../admin/index.php");
                 } else {
-                    Header('Location:../login.php?err_not_found');
-                    die;
+                    // $msg = "Server-Error!";
+                    // Header('Location:../login.php?msg='.$msg);
+                    // die;
                 }
             }
         }

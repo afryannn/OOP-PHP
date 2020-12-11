@@ -65,11 +65,10 @@ if (empty(trim($_POST['new_password']))) {
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-
-                <a href="reset-password.php" style="text-decoration:none !important;"><span
+                  <span
                         class="login100-form-title p-b-33">
                         Reset Password
-                    </span></a>
+                    </span>
                 <?php
 if ($validate_err == "msg1") {
     ?>

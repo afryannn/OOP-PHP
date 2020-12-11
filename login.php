@@ -1,6 +1,10 @@
 <?php 
 $username = $password = "";
 $validate_err="";
+$network_error  = "Server-Error!";
+$user_not_found = "YUmCU74eCeHC5AVGrHxxdDtY9kRUMLkPEEpXEbDnsREXNShecEDRvpNJXU3pqLhY8sMPdz28H6aHMV3sAntZzsY2t3d2HjHTAk9brE8ur3pnyHmHeRJjaYiM";
+$wrong_password = "mxnBrpeBdfKcvB8FsdhQAVKKQXQMz5J96GhJnv26e5Xx8KJXGrZnNsABDHiz9L52TiqQDVfHVKSVfaAgbgD8ykyAt6FUQjHcGfFeRxTZD8DGpBjPigjENaQp";
+// $acces_denied   = "27nipfeEDnPqiFuxAnV9R6pRjg9FHgTn9oGRTU8cb7vGLpvcEeXEA3CJboHHHoqQSkM8qN9Q3rPQeXxHAm6XMGPhe6NCgMz482crBpyymrpakkFdn8JcLfb8";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($_POST['username']))) {
          $validate_err = "err1";
@@ -28,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
     <link rel="icon" type="image/png" href="./asset/images/icons/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="./asset/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="./asset/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./asset/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="./asset/vendor/animate/animate.css">
@@ -54,45 +59,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-
                 <a href="login.php" style="text-decoration:none !important;"><span class="login100-form-title p-b-33">
-                        Account Login
+                        Admin Login
                     </span></a>
                 <?php
                  if($validate_err == "err1"){
                  ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-warning" role="alert">
                     Username Kosong!
                 </div>
                 <?php
                 }else if($validate_err == "err2"){
                 ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-warning" role="alert">
                     Password Kosong!
                 </div>
                 <?              
-                }else if(isset($_GET['NetworkErr'])){
+                }else if(isset($_GET['msgs'])){
                 ?>
                 <div class="alert alert-warning" role="alert">
                     Database Tidak Terhubung!
                 </div>
                 <?php
-                }else if(isset($_GET['Autherr1'])){
+                }else if(isset($_GET[$wrong_password])){
                     ?>
-                <div class="alert alert-warning" role="alert">
-                    akun Tidak Ditemukan
+                <div class="alert alert-danger" role="alert">
+                <i class="fa fa-key"></i>
+                    Password Salah !
                 </div>
                 <?php
-                }else if(isset($_GET['err-uat'])){
+                }else if(isset($acces_denied)){
                     ?>
-                <div class="alert alert-warning" role="alert">
-                    Password Salah!
+                <div class="alert alert-danger" role="alert">
+                    Akses Ditolak!
+                </div>
+                <?php
+                }else if(isset($_GET[$user_not_found])){
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-user-slash"></i>
+                     Username Tidak Diemukan !
                 </div>
                 <?php
                 }
                 ?>
+                
                 <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
-
                     <div class="wrap-input100 validate-input <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                         <input value="<?php echo $username?>" class="input100" type="text" name="username" placeholder="username">
                     </div>
@@ -111,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                 </form>
 
-                <div class="text-center p-t-45 p-b-4">
+                <!-- <div class="text-center p-t-45 p-b-4">
                 <div class="text-center">
                     <span class="txt1">
                         Create an account?
@@ -120,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a href="register.php" class="txt2 hov1">
                         Sign up
                     </a>
-                </div>
+                </div> -->
 
             </div>
         </div>
